@@ -9,6 +9,9 @@ use App\Services\AuthService;
  */
 class AuthController extends AbstractController
 {
+    /**
+     * Affiche le formulaire de connexion et traite la soumission.
+     */
     public function login(): void
     {
         $auth = new AuthService();
@@ -27,6 +30,9 @@ class AuthController extends AbstractController
         $this->render('login');
     }
 
+    /**
+     * Déconnecte l'utilisateur et redirige vers l'accueil.
+     */
     public function logout(): void
     {
         $auth = new AuthService();

@@ -7,6 +7,9 @@ namespace App\Controllers;
  */
 class AdminController extends AbstractController
 {
+    /**
+     * Affiche le tableau de bord administrateur.
+     */
     public function dashboard(): void
     {
         $this->requireAdmin();

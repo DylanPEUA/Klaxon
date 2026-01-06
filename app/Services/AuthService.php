@@ -68,11 +68,17 @@ class AuthService
         return $_SESSION['user'] ?? null;
     }
 
+    /**
+     * Vérifie si un utilisateur est connecté.
+     */
     public function isLoggedIn(): bool
     {
         return isset($_SESSION['user']);
     }
 
+    /**
+     * Vérifie si l'utilisateur connecté est administrateur.
+     */
     public function isAdmin(): bool
     {
         return isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN';

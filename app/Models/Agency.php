@@ -18,11 +18,17 @@ class Agency
         $this->name = $name;
     }
 
+    /**
+     * Retourne l'identifiant de l'agence.
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * Retourne le nom de l'agence.
+     */
     public function getName(): string
     {
         return $this->name;

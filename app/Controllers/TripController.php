@@ -14,6 +14,9 @@ use InvalidArgumentException;
  */
 class TripController extends AbstractController
 {
+    /**
+     * Affiche le formulaire de création de trajet et traite la soumission.
+     */
     public function create(): void
     {
         $this->requireLogin();
