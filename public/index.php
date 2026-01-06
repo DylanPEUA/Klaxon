@@ -2,6 +2,30 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../config/bootstrap.php';
+
+use App\Controllers\HomeController;
+use App\Controllers\AuthController;
+
+$route = $_GET['route'] ?? '/';
+
+switch ($route) {
+    case '/':
+        (new HomeController())->index();
+        break;
+
+    case 'login':
+        (new AuthController())->login();
+        break;
+
+    case 'logout':
+        (new AuthController())->logout();
+        break;
+
+    default:
+        http_response_code(404);
+        echo 'Page non trouvée';
+}
+
 /* ________________________Teste de la connexion à la base de données________________________
 use App\Database\Database;
 
@@ -70,4 +94,4 @@ $auth->logout();
 echo '<br>Déconnecté';
 */ 
 
-echo 'Application prête';
+/*echo 'Application prête';*/
