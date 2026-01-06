@@ -27,6 +27,14 @@ switch ($route) {
         (new TripController())->create();
         break;
 
+    case 'trip/edit':
+        (new TripController())->edit();
+        break;
+
+    case 'trip/delete':
+        (new TripController())->delete();
+        break;
+
     case 'admin':
         (new AdminController())->dashboard();
         break;
