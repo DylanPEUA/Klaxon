@@ -23,7 +23,8 @@ INSERT INTO employees (id, firstname, lastname, phone, email, role, password) VA
 (17,'Girard','Sarah','688665544','sarah.girard@email.fr','USER','$2y$10$testhash'),
 (18,'Lambert','Hugo','611223366','hugo.lambert@email.fr','USER','$2y$10$testhash'),
 (19,'Masson','Julie','733445566','julie.masson@email.fr','USER','$2y$10$testhash'),
-(20,'Henry','Arthur','666554433','arthur.henry@email.fr','USER','$2y$10$testhash');
+(20,'Henry','Arthur','666554433','arthur.henry@email.fr','USER','$2y$10$testhash'),
+(21,'Admin','Super','600000000','admin@email.fr','ADMIN','$2y$10$testhash');
 
 
 -- =========================
