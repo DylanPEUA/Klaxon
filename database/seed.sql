@@ -64,3 +64,8 @@ INSERT INTO trips (
     2
 );
 
+UPDATE trips
+SET
+  departure_datetime = '2030-01-01 08:00:00',
+  arrival_datetime   = '2030-01-01 12:00:00'
+WHERE id = 1;
