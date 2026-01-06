@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
-
+require __DIR__ . '/../config/bootstrap.php';
 /* ________________________Teste de la connexion à la base de données________________________
 use App\Database\Database;
 
@@ -54,5 +54,20 @@ foreach ($trips as $trip) {
         . '<br>';
 }
 */
+
+/* ________________________Teste de AuthService.php________________________ 
+use App\Services\AuthService;
+
+$auth = new AuthService();
+
+if ($auth->login('alexandre.martin@email.fr', 'password')) {
+    echo 'Connexion réussie<br>';
+    echo 'Bonjour ' . $_SESSION['user']['firstname'];
+} else {
+    echo 'Échec de connexion';
+}
+$auth->logout();
+echo '<br>Déconnecté';
+*/ 
 
 echo 'Application prête';
