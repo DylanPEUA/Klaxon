@@ -9,6 +9,9 @@ use App\Repositories\TripRepository;
  */
 class HomeController extends AbstractController
 {
+    /**
+     * Affiche la page d'accueil avec les trajets disponibles.
+     */
     public function index(): void
     {
         $tripRepository = new TripRepository();

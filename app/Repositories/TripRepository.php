@@ -21,26 +21,27 @@ class TripRepository
         $this->pdo = Database::getConnection();
     }
 
-        public function save(Trip $trip): void
-        {
-            $stmt = $this->pdo->prepare(
-                'INSERT INTO trips 
-                (departure_agency_id, arrival_agency_id, departure_datetime, arrival_datetime, total_seats, available_seats, contact_employee_id)
-                VALUES (:dep, :arr, :dep_dt, :arr_dt, :total, :avail, :emp)'
-            );
+    /**
+     * Enregistre un nouveau trajet en base de données.
+     */
+    public function save(Trip $trip): void
+    {
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO trips 
+            (departure_agency_id, arrival_agency_id, departure_datetime, arrival_datetime, total_seats, available_seats, contact_employee_id)
+            VALUES (:dep, :arr, :dep_dt, :arr_dt, :total, :avail, :emp)'
+        );
 
-            $stmt->execute([
-                'dep' => $trip->getDepartureAgency()->getId(),
-                'arr' => $trip->getArrivalAgency()->getId(),
-                'dep_dt' => $trip->getDepartureDateTime()->format('Y-m-d H:i:s'),
-                'arr_dt' => $trip->getArrivalDateTime()->format('Y-m-d H:i:s'),
-                'total' => $trip->getTotalSeats(),
-                'avail' => $trip->getAvailableSeats(),
-                'emp' => $trip->getContact()->getId(),
-            ]);
-        }
-
-
+        $stmt->execute([
+            'dep' => $trip->getDepartureAgency()->getId(),
+            'arr' => $trip->getArrivalAgency()->getId(),
+            'dep_dt' => $trip->getDepartureDateTime()->format('Y-m-d H:i:s'),
+            'arr_dt' => $trip->getArrivalDateTime()->format('Y-m-d H:i:s'),
+            'total' => $trip->getTotalSeats(),
+            'avail' => $trip->getAvailableSeats(),
+            'emp' => $trip->getContact()->getId(),
+        ]);
+    }
     /**
      * Retourne les trajets futurs avec des places disponibles.
      *

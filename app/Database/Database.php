@@ -5,10 +5,16 @@ namespace App\Database;
 use PDO;
 use PDOException;
 
+/**
+ * Connexion à la base de données (Singleton).
+ */
 class Database
 {
     private static ?PDO $pdo = null;
 
+    /**
+     * Retourne l'instance PDO de connexion à la base de données.
+     */
     public static function getConnection(): PDO
     {
         if (self::$pdo === null) {

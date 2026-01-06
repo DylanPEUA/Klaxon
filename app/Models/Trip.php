@@ -40,46 +40,73 @@ class Trip
         $this->contact = $contact;
     }
 
+    /**
+     * Retourne l'identifiant du trajet.
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * Retourne l'agence de départ.
+     */
     public function getDepartureAgency(): Agency
     {
         return $this->departureAgency;
     }
 
+    /**
+     * Retourne l'agence d'arrivée.
+     */
     public function getArrivalAgency(): Agency
     {
         return $this->arrivalAgency;
     }
 
+    /**
+     * Retourne la date et heure de départ.
+     */
     public function getDepartureDateTime(): DateTime
     {
         return $this->departureDateTime;
     }
 
+    /**
+     * Retourne la date et heure d'arrivée.
+     */
     public function getArrivalDateTime(): DateTime
     {
         return $this->arrivalDateTime;
     }
 
+    /**
+     * Retourne le nombre total de places.
+     */
     public function getTotalSeats(): int
     {
         return $this->totalSeats;
     }
 
+    /**
+     * Retourne le nombre de places disponibles.
+     */
     public function getAvailableSeats(): int
     {
         return $this->availableSeats;
     }
 
+    /**
+     * Retourne l'employé contact du trajet.
+     */
     public function getContact(): Employee
     {
         return $this->contact;
     }
 
+    /**
+     * Vérifie s'il reste des places disponibles.
+     */
     public function hasAvailableSeats(): bool
     {
         return $this->availableSeats > 0;
