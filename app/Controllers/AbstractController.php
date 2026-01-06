@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Services\AuthService;
+
+
 /**
  * Classe de base des controllers.
  */
-abstract class AbstractController
+abstract class AbstractController   
 {
     /**
      * Affiche une vue.
@@ -26,5 +29,31 @@ abstract class AbstractController
     {
         header('Location: ' . $url);
         exit;
+    }
+
+    /**
+     * Vérifie que l'utilisateur est connecté.
+     */
+    protected function requireLogin(): void
+    {
+        $auth = new AuthService();
+
+        if (!$auth->isLoggedIn()) {
+            $this->redirect('/?route=login');
+        }
+    }
+
+    /**
+     * Vérifie que l'utilisateur est administrateur.
+     */
+    protected function requireAdmin(): void
+    {
+        $auth = new AuthService();
+
+        if (!$auth->isAdmin()) {
+            http_response_code(403);
+            echo 'Accès interdit';
+            exit;
+        }
     }
 }

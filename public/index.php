@@ -5,6 +5,8 @@ require __DIR__ . '/../config/bootstrap.php';
 
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use App\Controllers\TripController;
+use App\Controllers\AdminController;
 
 $route = $_GET['route'] ?? '/';
 
@@ -19,6 +21,14 @@ switch ($route) {
 
     case 'logout':
         (new AuthController())->logout();
+        break;
+    
+    case 'trip/create':
+        (new TripController())->create();
+        break;
+
+    case 'admin':
+        (new AdminController())->dashboard();
         break;
 
     default:
