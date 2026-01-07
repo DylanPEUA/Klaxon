@@ -1,0 +1,8 @@
+http://localhost:8000/?route=admin                  → Tableau de bord
+http://localhost:8000/?route=admin/employees        → Liste employés
+http://localhost:8000/?route=admin/agencies         → Liste agences
+http://localhost:8000/?route=admin/agency/create    → Créer agence
+http://localhost:8000/?route=admin/agency/edit&id=1 → Modifier agence
+http://localhost:8000/?route=admin/agency/delete&id=1 → Supprimer agence
+http://localhost:8000/?route=admin/trips            → Liste trajets
+http://localhost:8000/?route=admin/trip/delete&id=1 → Supprimer trajet
