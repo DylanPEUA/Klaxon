@@ -35,8 +35,37 @@ switch ($route) {
         (new TripController())->delete();
         break;
 
+    // Routes admin
     case 'admin':
         (new AdminController())->dashboard();
+        break;
+
+    case 'admin/employees':
+        (new AdminController())->employees();
+        break;
+
+    case 'admin/agencies':
+        (new AdminController())->agencies();
+        break;
+
+    case 'admin/agency/create':
+        (new AdminController())->createAgency();
+        break;
+
+    case 'admin/agency/edit':
+        (new AdminController())->editAgency();
+        break;
+
+    case 'admin/agency/delete':
+        (new AdminController())->deleteAgency();
+        break;
+
+    case 'admin/trips':
+        (new AdminController())->trips();
+        break;
+
+    case 'admin/trip/delete':
+        (new AdminController())->deleteTrip();
         break;
 
     default:
