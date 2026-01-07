@@ -11,15 +11,21 @@ use App\Services\AuthService;
 abstract class AbstractController   
 {
     /**
-     * Affiche une vue.
+     * Affiche une vue avec le layout.
      *
      * @param array<string, mixed> $params
      */
-    protected function render(string $view, array $params = []): void
+    protected function render(string $view, array $params = [], string $title = ''): void
     {
         extract($params);
 
+        // Capture le contenu de la vue
+        ob_start();
         require __DIR__ . '/../Views/' . $view . '.php';
+        $content = ob_get_clean();
+
+        // Inclut le layout avec le contenu
+        require __DIR__ . '/../Views/layouts/base.php';
     }
 
     /**
