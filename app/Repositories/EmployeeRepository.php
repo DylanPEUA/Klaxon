@@ -19,6 +19,36 @@ class EmployeeRepository
     }
 
     /**
+     * Retourne tous les employés.
+     *
+     * @return Employee[]
+     */
+    public function findAll(): array
+    {
+        $stmt = $this->pdo->query(
+            'SELECT id, firstname, lastname, email, phone, role
+             FROM employees
+             ORDER BY lastname, firstname'
+        );
+        $rows = $stmt->fetchAll();
+
+        $employees = [];
+
+        foreach ($rows as $row) {
+            $employees[] = new Employee(
+                (int) $row['id'],
+                $row['firstname'],
+                $row['lastname'],
+                $row['email'],
+                $row['phone'],
+                $row['role']
+            );
+        }
+
+        return $employees;
+    }
+
+    /**
      * Trouve un employé par email.
      */
     public function findByEmail(string $email): ?Employee

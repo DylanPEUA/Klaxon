@@ -4,13 +4,18 @@ use PHPUnit\Framework\TestCase;
 use App\Services\TripService;
 use App\Models\Employee;
 
+/**
+ * Tests unitaires pour TripService.
+ */
 class TripServiceTest extends TestCase
 {
-    public function testCreateTripSuccess(): void
-    {
-        $service = new TripService();
+    private TripService $service;
+    private Employee $employee;
 
-        $employee = new Employee(
+    protected function setUp(): void
+    {
+        $this->service = new TripService();
+        $this->employee = new Employee(
             1,
             'Jean',
             'Dupont',
@@ -18,17 +23,80 @@ class TripServiceTest extends TestCase
             '0600000000',
             'USER'
         );
+    }
+
+    /**
+     * Teste la création d'un trajet avec succès.
+     */
+    public function testCreateTripSuccess(): void
+    {
+        $data = [
+            'departure_agency'   => 1,
+            'arrival_agency'     => 2,
+            'departure_datetime' => '2030-12-10 08:00:00',
+            'arrival_datetime'   => '2030-12-10 12:00:00',
+            'total_seats'        => 4
+        ];
+
+        $this->service->createTrip($data, $this->employee);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Teste la création d'un trajet avec la même agence de départ et d'arrivée.
+     */
+    public function testCreateTripSameAgencyThrowsException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('L\'agence de départ et d\'arrivée doivent être différentes.');
+
+        $data = [
+            'departure_agency'   => 1,
+            'arrival_agency'     => 1,
+            'departure_datetime' => '2030-12-10 08:00:00',
+            'arrival_datetime'   => '2030-12-10 12:00:00',
+            'total_seats'        => 4
+        ];
+
+        $this->service->createTrip($data, $this->employee);
+    }
+
+    /**
+     * Teste la création d'un trajet avec une date d'arrivée avant la date de départ.
+     */
+    public function testCreateTripArrivalBeforeDepartureThrowsException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('La date d\'arrivée doit être postérieure à la date de départ.');
 
         $data = [
             'departure_agency'   => 1,
             'arrival_agency'     => 2,
-            'departure_datetime' => '2025-12-10 08:00:00',
-            'arrival_datetime'   => '2025-12-10 12:00:00',
+            'departure_datetime' => '2030-12-10 12:00:00',
+            'arrival_datetime'   => '2030-12-10 08:00:00',
             'total_seats'        => 4
         ];
 
-        $service->createTrip($data, $employee);
+        $this->service->createTrip($data, $this->employee);
+    }
 
-        $this->assertTrue(true); // Test passe sans exception
+    /**
+     * Teste la création d'un trajet avec un nombre de places invalide.
+     */
+    public function testCreateTripInvalidSeatsThrowsException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Le nombre de places doit être supérieur à zéro.');
+
+        $data = [
+            'departure_agency'   => 1,
+            'arrival_agency'     => 2,
+            'departure_datetime' => '2030-12-10 08:00:00',
+            'arrival_datetime'   => '2030-12-10 12:00:00',
+            'total_seats'        => 0
+        ];
+
+        $this->service->createTrip($data, $this->employee);
     }
 }

@@ -9,10 +9,14 @@ namespace App\Models;
  */
 class Agency
 {
-    private int $id;
+    private ?int $id;
     private string $name;
 
-    public function __construct(int $id, string $name)
+    /**
+     * @param int|null $id
+     * @param string $name
+     */
+    public function __construct(?int $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,7 +25,7 @@ class Agency
     /**
      * Retourne l'identifiant de l'agence.
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -1,0 +1,23 @@
+Routes publiques (sans connexion) :
+http://localhost:8000/                              → Page d'accueil - Liste des trajets disponibles
+http://localhost:8000/?route=login                  → Formulaire de connexion
+
+Routes utilisateur connecté :
+http://localhost:8000/?route=logout                 → Déconnexion
+http://localhost:8000/?route=trip/create            → Créer un trajet
+http://localhost:8000/?route=trip/edit&id=1         → Modifier le trajet #1
+http://localhost:8000/?route=trip/delete&id=1       → Supprimer le trajet #1
+
+Admin : 
+http://localhost:8000/?route=admin                    → Tableau de bord
+http://localhost:8000/?route=admin/employees          → Liste employés
+http://localhost:8000/?route=admin/agencies           → Liste agences
+http://localhost:8000/?route=admin/agency/create      → Créer agence
+http://localhost:8000/?route=admin/agency/edit&id=1   → Modifier agence
+http://localhost:8000/?route=admin/agency/delete&id=1 → Supprimer agence
+http://localhost:8000/?route=admin/trips              → Liste trajets
+http://localhost:8000/?route=admin/trip/delete&id=1   → Supprimer trajet
+
+Comptes de test :
+ADMIN : admin@email.fr / password
+USER  : alexandre.martin@email.fr / password
