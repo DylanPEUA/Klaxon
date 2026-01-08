@@ -49,7 +49,7 @@ class TripServiceTest extends TestCase
     public function testCreateTripSameAgencyThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('L\'agence de départ et d\'arrivée doivent être différentes.');
+        $this->expectExceptionMessage('Les agences doivent être différentes');
 
         $data = [
             'departure_agency'   => 1,
@@ -68,7 +68,7 @@ class TripServiceTest extends TestCase
     public function testCreateTripArrivalBeforeDepartureThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('La date d\'arrivée doit être postérieure à la date de départ.');
+        $this->expectExceptionMessage('Arrivée avant départ');
 
         $data = [
             'departure_agency'   => 1,
@@ -87,7 +87,7 @@ class TripServiceTest extends TestCase
     public function testCreateTripInvalidSeatsThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Le nombre de places doit être supérieur à zéro.');
+        $this->expectExceptionMessage('Nombre de places invalide');
 
         $data = [
             'departure_agency'   => 1,
