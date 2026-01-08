@@ -1,0 +1,78 @@
+/* 
+ * Klaxon - Styles personnalisés
+ * Palette de couleurs imposée
+ */
+
+:root {
+    --klaxon-light: #f1f8fc;
+    --klaxon-primary: #0074c7;
+    --klaxon-secondary: #00497c;
+    --klaxon-dark: #384050;
+    --klaxon-danger: #cd2c2e;
+    --klaxon-success: #82b864;
+}
+
+body {
+    background-color: var(--klaxon-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--klaxon-secondary) !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Boutons personnalisés */
+.btn-primary {
+    background-color: var(--klaxon-primary);
+    border-color: var(--klaxon-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--klaxon-secondary);
+    border-color: var(--klaxon-secondary);
+}
+
+.btn-danger {
+    background-color: var(--klaxon-danger);
+    border-color: var(--klaxon-danger);
+}
+
+.btn-success {
+    background-color: var(--klaxon-success);
+    border-color: var(--klaxon-success);
+}
+
+/* Cards trajets */
+.card-trip {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid var(--klaxon-primary);
+}
+
+.card-trip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer */
+footer {
+    background-color: var(--klaxon-dark);
+    color: white;
+    padding: 1rem 0;
+}
+
+/* Tables */
+.table thead {
+    background-color: var(--klaxon-secondary);
+    color: white;
+}

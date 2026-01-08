@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Repositories\TripRepository;
 use App\Repositories\AgencyRepository;
 use App\Repositories\EmployeeRepository;
 use App\Services\AuthService;
@@ -23,16 +22,17 @@ class TripController extends AbstractController
 
         $service = new TripService();
         $auth = new AuthService();
+        $employeeRepository = new EmployeeRepository();
+        
+        $employee = $auth->getCurrentUser();
+        
+        if ($employee === null) {
+            $this->redirect('/?route=login');
+            return;
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                $employeeRepository = new EmployeeRepository();
-                $employee = $employeeRepository->find($auth->getUser()['id']);
-                
-                if ($employee === null) {
-                    throw new InvalidArgumentException('Employé introuvable');
-                }
-                
                 $service->createTrip($_POST, $employee);
                 $this->redirect('/');
             } catch (InvalidArgumentException $e) {
@@ -44,6 +44,7 @@ class TripController extends AbstractController
 
         $this->render('trip/create', [
             'agencies' => $agencyRepository->findAll(),
+            'employee' => $employee,
             'error' => $error ?? null
         ]);
     }
@@ -68,8 +69,10 @@ class TripController extends AbstractController
         }
 
         // Vérifier que l'utilisateur est le propriétaire du trajet ou admin
-        $user = $auth->getUser();
-        if ($trip->getContact()->getId() !== $user['id'] && $user['role'] !== 'ADMIN') {
+        $currentUserId = $auth->getCurrentUserId();
+        $isAdmin = $auth->isAdmin();
+        
+        if ($trip->getContact()->getId() !== $currentUserId && !$isAdmin) {
             http_response_code(403);
             echo 'Accès interdit';
             return;
@@ -113,8 +116,10 @@ class TripController extends AbstractController
         }
 
         // Vérifier que l'utilisateur est le propriétaire du trajet ou admin
-        $user = $auth->getUser();
-        if ($trip->getContact()->getId() !== $user['id'] && $user['role'] !== 'ADMIN') {
+        $currentUserId = $auth->getCurrentUserId();
+        $isAdmin = $auth->isAdmin();
+        
+        if ($trip->getContact()->getId() !== $currentUserId && !$isAdmin) {
             http_response_code(403);
             echo 'Accès interdit';
             return;
